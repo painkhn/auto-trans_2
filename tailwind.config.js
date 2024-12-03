@@ -2,10 +2,15 @@ module.exports = {
   content: [
     "./src/**/*.{html,js}",
     "./*.html",
-    "./pages/*.html"
+    "./pages/*.html",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')({
+      charts: true,
+    }),
+  ]
 }
