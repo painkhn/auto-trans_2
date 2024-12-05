@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProfileController, AdminController, CarController, FavouriteController};
+use App\Http\Controllers\{ProfileController, AdminController, CarController, FavouriteController, OrderController, ReviewController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsAdmin;
 
@@ -8,9 +8,9 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->middleware(['auth'])->name('profile.index');
+Route::get('/rewievs', [ReviewController::class, 'index'])->name('comment.index');
+
+Route::get('/profile',  [ProfileController::class, 'index'])->middleware(['auth'])->name('profile.index');
 
 
 Route::get('/cars/{model?}', [CarController::class, 'index'])->name('cars.index');
@@ -23,11 +23,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/favourite', [FavouriteController::class, 'index'])->name('favourite.index');
     Route::post('/cars/{car}/add-to-favourites', [FavouriteController::class, 'addToFavourites'])->name('favourites.add');
     Route::delete('/cars/{car}/remove-from-favourites', [FavouriteController::class, 'removeFromFavourites'])->name('favourites.remove');
+    Route::post('/order/upload', [OrderController::class, 'upload'])->name('order.upload');
+    Route::post('/rewiev/upload', [ReviewController::class, 'upload'])->name('comment.upload');
 });
 
 Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::post('/model/upload', [CarController::class, 'upload'])->name('model.upload');
+    Route::patch('/orders/{orderId}', [OrderController::class, 'update'])->name('order.update');
 });
 
 require __DIR__.'/auth.php';

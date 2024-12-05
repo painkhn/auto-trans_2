@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Order;
 
 class ProfileController extends Controller
 {
+    public function index() {
+        return view('profile', [
+            'delivered_orders' => Order::where('status', 'delivered')->where('user_id', Auth::id())->get(),
+            'orders' => Order::where('status', 'not delivered')->where('user_id', Auth::id())->get()
+        ]);
+    }
     /**
      * Display the user's profile form.
      */

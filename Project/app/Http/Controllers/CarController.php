@@ -3,18 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Mark, Car};
+use App\Models\{Mark, Carm, Order, Car};
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
-    public function index($model=null) {
+    public function index($model = null) {
         if ($model == null) {
-            $cars = Car::all();
+            $orderedCarIds = Order::pluck('car_id')->toArray();
+            
+            $cars = Car::whereNotIn('id', $orderedCarIds)->get();
         } else {
             $model = Mark::where('name', $model)->firstOrFail();
-            $cars = Car::where('mark_id', $model->id)->get();
+            
+            $orderedCarIds = Order::whereIn('car_id', function($query) use ($model) {
+                $query->select('id')
+                      ->from('cars')
+                      ->where('mark_id', $model->id);
+            })->pluck('car_id')->toArray();
+            
+            $cars = Car::where('mark_id', $model->id)
+                        ->whereNotIn('id', $orderedCarIds)
+                        ->get();
         }
+    
         return view('cars', [
             'marks' => Mark::all(),
             'cars' => $cars,

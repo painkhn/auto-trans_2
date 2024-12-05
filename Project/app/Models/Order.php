@@ -10,6 +10,7 @@ class Order extends Model
         'car_id',
         'user_id',
         'phone',
+        'status'
     ];
 
 
@@ -21,5 +22,9 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
     }
 }

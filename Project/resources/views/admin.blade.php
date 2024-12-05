@@ -108,19 +108,25 @@
                         Заявки
                     </h2>
                     <ul class="flex flex-col gap-5">
-                        <li>
-                            <a href="НОМЕР ТЕЛЕФОНА ЗАКАЗЧИКА">
-                                <div
-                                    class="w-full h-14 border border-gray-200 rounded-md flex items-center px-4 transition-all hover:border-purple-700">
-                                    <h3 class="text-lg font-semibold mr-2">
-                                        Имя дебила | +79995225252 |
-                                    </h3>
-                                    <p class="text-lg font-semibold text-purple-700">
-                                        BMW 8 серии II (G14/G15/G16) Рестайлинг
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
+                        @foreach ($orders as $item)
+                            <li>
+                                <form action="{{ route('order.update', [$item->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button class="w-full" type="submit">
+                                        <div
+                                            class="w-full h-14 border border-gray-200 rounded-md flex items-center px-4 transition-all hover:border-purple-700">
+                                            <h3 class="text-lg font-semibold mr-2">
+                                                {{ $item->user->name }} | {{ $item->phone }} |
+                                            </h3>
+                                            <p class="text-lg font-semibold text-purple-700">
+                                                {{ $item->car->name }}
+                                            </p>
+                                        </div>
+                                    </button>
+                                </form>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

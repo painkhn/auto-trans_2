@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li class="border-x-2 border-gray-200 px-2">
-                <a href="pages/reviews.html">
+                <a href="{{ route('comment.index') }}">
                     <div
                         class="transition-all hover:bg-gray-200 px-4 py-1 flex items-center rounded opacity-70 hover:!opacity-100">
                         <p class="text-xl font-semibold mx-auto my-0">

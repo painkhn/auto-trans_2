@@ -28,9 +28,7 @@
                     <div id="default-modal-{{ $car->id }}" tabindex="-1" aria-hidden="true"
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-2xl max-h-full">
-                            <!-- Modal content -->
                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <!-- Modal header -->
                                 <div
                                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -47,11 +45,11 @@
                                         <span class="sr-only">Close modal</span>
                                     </button>
                                 </div>
-                                <!-- Modal body -->
                                 <div class="p-4 md:p-5 space-y-4">
-                                    <form class="max-w-xl mx-auto my-0 flex flex-col gap-5">
+                                    <form class="max-w-xl mx-auto my-0 flex flex-col gap-5" method="POST"
+                                        action="{{ route('order.upload') }}">
+                                        @csrf
                                         <input type="text" value="{{ $car->id }}" name="car_id" class="hidden">
-                                        <input type="text" value="{{ Auth::user()->name }}" class="hidden">
                                         <div class="flex flex-col gap-1">
                                             <label>Номер телефона</label>
                                             <input type="text" name="phone" id="phone-{{ $car->id }}"
