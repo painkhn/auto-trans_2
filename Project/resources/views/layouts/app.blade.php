@@ -22,7 +22,7 @@
     <nav class="w-full min-h-12 bg-white px-20 shadow-md">
         <ul class="grid grid-cols-4 items-center min-h-12 gap-5">
             <li class="border-x-2 border-gray-200 px-2">
-                <a href="pages/shop.html">
+                <a href="{{ route('cars.index') }}">
                     <div
                         class="transition-all hover:bg-gray-200 px-4 py-1 flex items-center rounded opacity-70 hover:!opacity-100">
                         <p class="text-xl font-semibold mx-auto my-0">
@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class="border-x-2 border-gray-200 px-2">
-                <a href="pages/favorites.html">
+                <a href="{{ route('favourite.index') }}">
                     <div
                         class="transition-all hover:bg-gray-200 px-4 py-1 flex items-center rounded opacity-70 hover:!opacity-100">
                         <p class="text-xl font-semibold mx-auto my-0">

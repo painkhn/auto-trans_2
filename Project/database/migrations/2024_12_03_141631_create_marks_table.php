@@ -16,6 +16,18 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        DB::table('marks')->insert([
+            ['name' => 'Toyota'],
+            ['name' => 'Porsche'],
+            ['name' => 'Mercedes'],
+            ['name' => 'BMW'],
+            ['name' => 'Audi'],
+            ['name' => 'Honda'],
+            ['name' => 'Rolls-Royce'],
+            ['name' => 'Bentley'],
+            ['name' => 'Dodge'],
+        ]);
     }
 
     /**
