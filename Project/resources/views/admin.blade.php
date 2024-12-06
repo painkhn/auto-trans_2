@@ -141,20 +141,18 @@
                         <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
                             <div class="flex justify-between">
                                 <div>
-                                    <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">10
+                                    <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
+                                        {{ $ordersCount }}
                                     </h5>
                                     <p class="text-base font-normal text-gray-500 dark:text-gray-400">Заказов за месяц
                                     </p>
                                 </div>
                             </div>
-                            <div id="area-chart"></div>
+                            <div id="area-chart-orders"></div>
                             <div
                                 class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
                                 <div class="flex justify-between items-center pt-5">
-                                    <!-- Button -->
-                                    <p>
-                                        Последние 30 дней
-                                    </p>
+                                    <p>Последние 30 дней</p>
                                 </div>
                             </div>
                         </div>
@@ -186,17 +184,17 @@
                 </div>
 
             </div>
-            <a href="#!">
+            {{-- <a href="{{ route('exel') }}">
                 <button
                     class="px-4 py-2 bg-purple-700 transition-all hover:bg-purple-600 text-white rounded-md block mx-auto my-0">Скачать
                     отчёт в Excel</button>
-            </a>
+            </a> --}}
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script>
-        const options = {
+        const options_orders = {
             chart: {
                 height: "100%",
                 maxWidth: "100%",
@@ -240,14 +238,12 @@
                 },
             },
             series: [{
-                name: "New users",
-                data: [6500, 6418, 6456, 6526, 6356, 6456],
-                color: "#1A56DB",
-            }, ],
+                name: "Orders",
+                data: @json($ordersData->pluck('count')), // Data for order counts
+                color: "#FF5733", // Custom color for the orders line
+            }],
             xaxis: {
-                categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February',
-                    '07 February'
-                ],
+                categories: @json($ordersData->pluck('date')), // Dates of the orders
                 labels: {
                     show: false,
                 },
@@ -261,7 +257,7 @@
             yaxis: {
                 show: false,
             },
-        }
+        };
 
         const options_users = {
             chart: {
@@ -329,9 +325,9 @@
         };
 
 
-        if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
-            const chart = new ApexCharts(document.getElementById("area-chart"), options);
-            chart.render();
+        if (document.getElementById("area-chart-orders") && typeof ApexCharts !== 'undefined') {
+            const chartOrders = new ApexCharts(document.getElementById("area-chart-orders"), options_orders);
+            chartOrders.render();
         }
 
         if (document.getElementById("area-chart-users") && typeof ApexCharts !== 'undefined') {
