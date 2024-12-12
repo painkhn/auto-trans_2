@@ -1,14 +1,15 @@
 <x-app-layout>
     <div class="px-20">
-        <div class="w-full min-h-screen bg-gray-50 rounded-md shadow-md py-20 px-10">
-            <h1 class="text-center font-black text-5xl max-w-3xl mx-auto my-0 text-gray-800 mb-5">
-                Добро пожаловать на сайт компании <span class="text-purple-700">AutoTrans</span>
+        <div class="w-full min-h-screen bg-gray-50 rounded-md shadow-md py-20 px-10 relative">
+            <img src="{{ asset('img/example-car.jpg') }}" alt="" class="top-0 left-0 mx-auto my-0 absolute -z-10 blur-sm">
+            <h1 class="text-center font-black text-5xl max-w-3xl mx-auto my-0 text-gray-800 mb-5 z-10 relative">
+                Добро пожаловать на сайт компании <span class="text-purple-700 z-10 relative">AutoTrans</span>
             </h1>
-            <p class="text-center font-semibold text-2xl max-w-5xl mx-auto my-0 text-gray-700 mb-10">
+            <p class="text-center font-semibold text-2xl max-w-5xl mx-auto my-0 text-black mb-10 z-10 relative">
                 Мы предлагаем широкий спектр услуг, связанных с импортом автомобилей, грузовых и коммерческих
                 транспортных средств, обеспечивая высокое качество и профессионализм на каждом этапе.
             </p>
-            <a href="#why-us" class="mb-10 outline-none">
+            <a href="#why-us" class="mb-10 outline-none block z-10 relative">
                 <button
                     class="w-full text-center py-4 bg-gray-100 rounded-md transition-all hover:shadow-md border border-transparent hover:border-gray-200 hover:bg-gray-200">
                     <svg class="w-6 h-6 text-gray-800 mx-auto my-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -18,13 +19,12 @@
                     </svg>
                 </button>
             </a>
-            <h2 class="text-center font-black text-5xl max-w-3xl mx-auto my-0 text-gray-800 mt-40 mb-20" id="why-us">
+            <h2 class="text-center font-black text-5xl max-w-3xl mx-auto my-0 text-black p-4 rounded-md bg-white mt-40 mb-20 z-10 relative" id="why-us">
                 Почему выбирают нас?
             </h2>
-            {{-- <img src="{{ asset('img/svo.jpg') }}" alt="" class="w-full"> --}}
-            <ul class="grid grid-cols-3 gap-5 mb-20">
+            <ul class="grid grid-cols-3 gap-5 mb-20 z-10 relative">
                 <li>
-                    <div class="w-full border border-gray-200 p-5 text-center rounded-md min-h-52">
+                    <div class="w-full border border-gray-200 bg-white p-5 text-center rounded-md min-h-52">
                         <h3 class="text-2xl font-semibold mb-4 text-purple-700">
                             Опыт и надежность
                         </h3>
@@ -35,7 +35,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="w-full border border-gray-200 p-5 text-center rounded-md min-h-52">
+                    <div class="w-full border border-gray-200 bg-white p-5 text-center rounded-md min-h-52">
                         <h3 class="text-2xl font-semibold mb-4 text-purple-700">
                             Полный спектр услуг
                         </h3>
@@ -46,7 +46,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="w-full border border-gray-200 p-5 text-center rounded-md min-h-52">
+                    <div class="w-full border border-gray-200 bg-white p-5 text-center rounded-md min-h-52">
                         <h3 class="text-2xl font-semibold mb-4 text-purple-700">
                             Индивидуальный подход
                         </h3>
