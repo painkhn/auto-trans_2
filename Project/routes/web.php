@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::post('/model/upload', [CarController::class, 'upload'])->name('model.upload');
+    Route::delete('/model/delete/{car_id}', [CarController::class, 'delete'])->name('car.delete');
+    Route::get('/model/edit/{car_id}', [CarController::class, 'openEdit'])->name('model.edit');
+    Route::patch('/model/edit/{car_id}', [CarController::class, 'update'])->name('model.edit.save');
     Route::patch('/orders/{orderId}', [OrderController::class, 'update'])->name('order.update');
 });
 

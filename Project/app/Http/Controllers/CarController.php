@@ -11,22 +11,22 @@ class CarController extends Controller
     public function index($model = null) {
         if ($model == null) {
             $orderedCarIds = Order::pluck('car_id')->toArray();
-            
+
             $cars = Car::whereNotIn('id', $orderedCarIds)->get();
         } else {
             $model = Mark::where('name', $model)->firstOrFail();
-            
+
             $orderedCarIds = Order::whereIn('car_id', function($query) use ($model) {
                 $query->select('id')
                       ->from('cars')
                       ->where('mark_id', $model->id);
             })->pluck('car_id')->toArray();
-            
+
             $cars = Car::where('mark_id', $model->id)
                         ->whereNotIn('id', $orderedCarIds)
                         ->get();
         }
-    
+
         return view('cars', [
             'marks' => Mark::all(),
             'cars' => $cars,
@@ -77,4 +77,48 @@ class CarController extends Controller
         ]);
     }
 
+    public function delete($car_id) {
+        $car = Car::findOrFail($car_id);
+        if($car) {
+            $car->delete();
+        }
+
+        return redirect(route('index'));
+    }
+
+    public function openEdit($car_id) {
+        $car = Car::findOrFail($car_id);
+        if($car) {
+            return view('editModel', [
+                'model' => $car
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function update(Request $request, $car_id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'mileage' => 'required|string',
+            'year' => 'required|numeric',
+            'engine' => 'required|string',
+            'volume' => 'nullable|string',
+            'power' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $model = Car::findOrFail($car_id);
+        $model->update($validated);
+
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('images', 'public');
+            $model->photo = $imagePath;
+            $model->save();
+        }
+
+        return redirect()->route('index');
+    }
 }

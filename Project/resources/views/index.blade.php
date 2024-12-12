@@ -21,6 +21,7 @@
             <h2 class="text-center font-black text-5xl max-w-3xl mx-auto my-0 text-gray-800 mt-40 mb-20" id="why-us">
                 Почему выбирают нас?
             </h2>
+            {{-- <img src="{{ asset('img/svo.jpg') }}" alt="" class="w-full"> --}}
             <ul class="grid grid-cols-3 gap-5 mb-20">
                 <li>
                     <div class="w-full border border-gray-200 p-5 text-center rounded-md min-h-52">
@@ -151,7 +152,7 @@
                 успешный импорт вашего транспортного средства. AutoTrans — ваш надежный партнер в мире
                 автомобильного импорта!
             </p>
-            <form class="max-w-xl mx-auto my-0 flex flex-col gap-5">
+            {{-- <form class="max-w-xl mx-auto my-0 flex flex-col gap-5">
                 <div class="flex flex-col gap-1">
                     <label>Ваше имя</label>
                     <input type="text"
@@ -166,7 +167,7 @@
                     class="w-full h-10 bg-purple-700 text-white rounded-md transition-all hover:bg-purple-600 font-semibold">
                     Отправить
                 </button>
-            </form>
+            </form> --}}
         </div>
     </div>
 </x-app-layout>

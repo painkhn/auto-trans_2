@@ -94,6 +94,20 @@
                             </form>
                         @endif
                     @endauth
+                    @if (Auth::user() && Auth::user()->is_admin == 1)
+                        <form action="{{ route('car.delete', $car->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit"
+                                class="w-full py-4 bg-purple-700 transition-all hover:bg-purple-600 text-white font-semibold text-lg rounded-md">
+                                Удалить
+                            </button>
+                        </form>
+                        <a href="{{ route('model.edit', $car->id) }}"
+                            class="w-full py-4 bg-purple-700 transition-all hover:bg-purple-600 text-white font-semibold text-lg rounded-md text-center">
+                            Редактировать
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
